@@ -6,39 +6,30 @@ from zenml import step
 
 class IngestData:
     """
-    Class to ingest data from a CSV file.
+    Data ingestion class which ingests data from the source and returns a DataFrame.
     """
 
-    def __init__(self, data_path: str):
-        """
-        Constructor for the IngestData class.
-        Args:
-            data_path: path to the data
-        """
-        self.data_path = data_path
+    def __init__(self) -> None:
+        """Initialize the data ingestion class."""
+        pass
 
-    def get_data(self):
-        """
-        Ingest data from the CSV file.
-        """
-        logging.info(f"Ingesting data from {self.data_path}")
-        return pd.read_csv(self.data_path)
+    def get_data(self, path: str = "./data/olist_customers_dataset.csv") -> pd.DataFrame:
+        df = pd.read_csv(path)
+        return df
 
 
 @step
-def ingest_df(data_path: str) -> pd.DataFrame:
+def ingest_data() -> pd.DataFrame:
     """
-    Ingest data from a CSV file.
-
     Args:
-        data_path: path to the data
+        None
     Returns:
-        pd.DataFrame: the ingested data
+        df: pd.DataFrame
     """
     try:
-        ingest_data = IngestData(data_path)
+        ingest_data = IngestData()
         df = ingest_data.get_data()
         return df
     except Exception as e:
-        logging.error(f"Error in ingesting data: {e}")
+        logging.error(e)
         raise e

@@ -1,0 +1,13 @@
+pandas
+numpy
+scikit-learn
+zenml
+typing_extensions
+optuna
+xgboost
+lightgbm
+mlflow
+pytest
+catboost
+click
+rich
